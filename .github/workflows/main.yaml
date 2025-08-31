@@ -5,7 +5,7 @@ on:
     branches:
       - prd
 
-git jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
 
