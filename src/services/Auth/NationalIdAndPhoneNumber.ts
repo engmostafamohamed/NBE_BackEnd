@@ -1,20 +1,31 @@
-import { IApiResponse } from "../../interfaces/ApiResponse";
-import { INationalIDAndPhoneNumber } from "../../interfaces/NationalIDAndPhoneNumber";
+// import { INationalIDAndPhoneNumber } from "../../interfaces/ICustNidTelSrc";
+type INationalIDAndPhoneNumber = { nationalID: number; phoneNumber: string };
 import { generateOTP } from "../../utils/auth";
+import CustNidTelSrc from "../../models/cust_nid_tel_src";
 
 // Store NationalId and PhoneNumber (example)
 export const StoreNationalIdAndPhoneNumber = async (
-  nationalID: number,
+  nationalId: string,
   phoneNumber: string
-): Promise<INationalIDAndPhoneNumber> => {
+): Promise<{ success: boolean; data?: INationalIDAndPhoneNumber; error?: string }> => {
   try {
-    const otpCode = generateOTP();
+    const record = await CustNidTelSrc.create({
+      nationalId,
+      phoneNumber,
+    });
 
-    return { nationalID, phoneNumber};
+    return {
+      success: true,
+      data: {
+        nationalID: Number(record.nationalId),
+        phoneNumber: record.phoneNumber,
+      },
+    };
   } catch (error: any) {
-    throw new Error(error.message || "Internal Server Error");
+    return { success: false, error: error.message || "Internal Server Error" };
   }
 };
+
 
 export const sendOtpService = async (nationalId: string, phoneNumber: string) => {
   return { otp: "123456", nationalId, phoneNumber }; 

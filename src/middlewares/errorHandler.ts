@@ -1,24 +1,32 @@
-import { SuccessResponse, ErrorResponse } from '../interfaces/ApiResponse';
+import { Response } from "express";
+import { SuccessResponse, ErrorResponse } from "../interfaces/ApiResponse";
 
-export const successResponse = <T>(message: string, data: T, statusCode: number = 200): SuccessResponse<T> => {
-  return {
+// success response
+export const successResponse = <T>(
+  res: Response,
+  data: T,
+  message: string,
+  statusCode: number = 200
+): Response<SuccessResponse<T>> => {
+  return res.status(statusCode).json({
     success: true,
     statusCode,
     message,
     data,
-  };
+  });
 };
 
+// error response
 export const errorResponse = (
+  res: Response,
   message: string,
   statusCode: number = 500,
-  validationErrors: { field: any; message: any }[] = []
-): ErrorResponse => {
-  return {
+  validationErrors: { field: string; message: string }[] = []
+): Response => {
+  return res.status(statusCode).json({
     success: false,
     statusCode,
     message,
     errors: validationErrors,
-  };
+  } as ErrorResponse);
 };
-

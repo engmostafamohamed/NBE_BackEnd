@@ -1,14 +1,19 @@
 src/
 ├── config/                   # Environment-based configs (DB, SMTP, etc.)
 │    └── database.ts
+|
+├── models/                   # Sequelize models
+│   └── cust_nid_tel_src.ts               # Example User model
+│   └── index.ts              # Central model loader & associations
+|
 ├── controllers/
-│   └── user/
-│       └── UserController.ts
+│   └── auth/
+│       └── AuthController.ts
 │
 ├── dtos/
-│   └── user/
-│       ├── CreateUserDto.ts
-│       └── index.ts         # Exports all DTOs
+│   └── auth/
+│       ├── sendOtpDTO.ts
+│       └── VerifyOtpDto.ts         # Exports all DTOs
 │
 ├── interfaces/
 │   └── user/
