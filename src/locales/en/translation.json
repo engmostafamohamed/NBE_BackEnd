@@ -7,7 +7,29 @@
     "invalid_token": "Invalid token",
     "email_exist": "Email already exists",
     "internal_error": "Internal server error",
+    "phone" : {
+        "notVerified": "Phone number is not verified",
+        "exists": "Phone number already exists",
+        "not_exists": "Phone number does not exist",
+        "alreadyVerified": "Phone number is already verified"
+    },
+    "nationalIdPhoneNumber": {
+        "store": "National ID and phone number stored successfully"
+    },
+    "otp": {
+        "sent": "OTP sent successfully",
+        "verified": "OTP verified successfully",
+        "invalid": "OTP is invalid or expired"
+    },
+    "common": {
+        "internalServerError": "Internal server error"
+    },
     "validation": {
+        "nationalId_required": "National ID is required",
+        "nationalId_length": "National ID must be between 10-20 characters",
+        "phone_required": "Phone number is required",
+        "phone_invalid": "Invalid phone number format",
+        "id_positive": "ID must be a positive integer",
         "email_required": "Email is required.",
         "email_invalid": "Invalid email format.",
         "password_required": "Password is required.",

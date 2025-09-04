@@ -7,7 +7,29 @@
     "missing_fields": "يجب ملء جميع الحقول",
     "email_exist": "البريد الإلكتروني موجود بالفعل",
     "internal_error": "خطأ في الخادم الداخلي",
+    "phone" : {
+        "notVerified": "رقم الهاتف غير موثق",
+        "exists": "رقم الهاتف موجود بالفعل",
+        "not_exists": "رقم الهاتف غير موجود",
+        "alreadyVerified": "رقم الهاتف موثق بالفعل"
+    },
+    "nationalIdPhoneNumber": {
+        "store": "تم تخزين الرقم القومي ورقم الهاتف بنجاح"
+    },
+    "otp": {
+        "sent": "تم إرسال OTP بنجاح",
+        "verified": "تم التحقق من OTP بنجاح",
+        "invalid": "OTP غير صالح أو منتهي الصلاحية"
+    },
+    "common": {
+        "internalServerError": "خطأ في الخادم الداخلي"
+    },
     "validation": {
+        "nationalId_required": "الرقم القومي مطلوب",
+        "nationalId_length": "يجب أن يكون الرقم القومي بين 10 و 20 رقمًا",
+        "phone_required": "رقم الهاتف مطلوب",
+        "phone_invalid": "صيغة رقم الهاتف غير صحيحة",
+        "id_positive": "المعرف يجب أن يكون رقمًا صحيحًا أكبر من 0",
         "email_required": "البريد الإلكتروني مطلوب.",
         "email_already_verified": "البريد الإلكتروني تم التحقق منه بالفعل",
         "email_not_found": "البريد الإلكتروني غير موجود.",
@@ -26,7 +48,10 @@
         "lastName_required": "اسم العائلة مطلوب.",
         "role_required": "الدور مطلوب.",
         "role_invalid": "الدور غير مطابق.",
-        "all_fields_required": "جميع الحقول ({fields}) مطلوبة."
+        "all_fields_required": "جميع الحقول ({fields}) مطلوبة.",
+        "phone_exists": "رقم الهاتف موجود بالفعل.",
+        "phone_not_exists": "رقم الهاتف غير موجود."
+
     }
 }
   

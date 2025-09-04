@@ -1,4 +1,4 @@
-import { CreateCustNidTelSrcDto, UpdateCustNidTelSrcDto } from "../dtos/auth/CustNidTelSrcDto";
+import { CreateCustNidTelSrcDto, UpdateCustNidTelSrcDto } from "../dtos/auth/nidTelSrcDto";
 
 export interface ICustNidTelSrc {
   id?: number;

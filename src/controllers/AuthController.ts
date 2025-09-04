@@ -5,39 +5,86 @@ import {
   verifyOtpService,
   StoreNationalIdAndPhoneNumber,
 } from "../services/Auth/NationalIdAndPhoneNumber";
+import { NidTelSrcResource } from "../resources/auth/nidTelSrcResource";
+import {
+  AddNidTelSrcDto,
+  UpdateCustNidTelSrcDto,
+  SendOtpDto,
+  VerifyOtpDto
+} from "../dtos/auth/nidTelSrcDto";
 
 // Store National ID and Phone Number
 export const storeNationalIdAndPhoneNumberController = async (
   req: Request,
   res: Response
 ) => {
-  const { nationalId, phoneNumber } = req.body;
+  try {
+    const dto: AddNidTelSrcDto = {
+      nationalId: req.body.nationalId,
+      phoneNumber: req.body.phoneNumber,
+    };
 
-  const result = await StoreNationalIdAndPhoneNumber(nationalId, phoneNumber);
+    const result = await StoreNationalIdAndPhoneNumber(
+      dto.nationalId,
+      dto.phoneNumber
+    );
 
-  if (!result.success) {
-    return errorResponse(res, result.error || req.t("common.internalServerError"), 500);
+    if (!result.success) {
+      return errorResponse(
+        res,
+        req.t(result.messageKey || "common.internalServerError"),
+        400 
+      );
+    }
+    return successResponse(
+      res,
+      null,
+      req.t(result.messageKey || "nationalIdPhoneNumber.stored")
+    );
+  } catch (error: any) {
+    return errorResponse(
+      res,
+      error.message || req.t("common.internalServerError"),
+      500
+    );
   }
-
-  return successResponse(res, result.data, req.t("nationalIdPhoneNumber.stored"));
 };
 
 // Send OTP
 export const sendOtpController = async (req: Request, res: Response) => {
-  const { nationalId, phoneNumber } = req.body;
-  const result = await sendOtpService(nationalId, phoneNumber);
+  try {
+    const dto: SendOtpDto = req.body;
 
-  return successResponse(res, result, req.t("otp.sent"));
+    const result = await sendOtpService(dto.phoneNumber);
+    if(!result.success) {
+      return errorResponse(res, req.t(result.messageKey || "otp.invalid"), 400);
+    }
+    return successResponse(res, result, req.t("otp.sent"));
+  } catch (error: any) {
+    return errorResponse(
+      res,
+      error.message || req.t("common.internalServerError"),
+      500
+    );
+  }
 };
-
 // Verify OTP
 export const verifyOtpController = async (req: Request, res: Response) => {
-  const { otp, phoneNumber } = req.body;
-  const result = await verifyOtpService(otp, phoneNumber);
+  try {
+    const dto: VerifyOtpDto = req.body;
 
-  if (!result.isValid) {
-    return errorResponse(res, req.t("otp.invalid"), 400);
+    const result = await verifyOtpService(dto.phoneNumber, dto.otp);
+
+    if(!result.success) {
+      return errorResponse(res, req.t(result.messageKey || "otp.invalid"), 400);
+    }
+
+    return successResponse(res, [], req.t("otp.verified"));
+  } catch (error: any) {
+    return errorResponse(
+      res,
+      error.message || req.t("common.internalServerError"),
+      500
+    );
   }
-
-  return successResponse(res, result, req.t("otp.verified"));
 };

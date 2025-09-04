@@ -1,10 +1,13 @@
-import { IsEmail, IsString, IsIn } from "class-validator";
+// import { IsString, Matches } from "class-validator";
 
-export class SendOtpDto {
-  @IsEmail({}, { message: "Please provide a valid email address" })
-  email!: string;
+// export class SendOtpDto {
+//   @IsString({ message: "Phone number is required" })
+//   @Matches(/^\+?[\d\s\-\(\)]{10,15}$/, {
+//     message: "Invalid phone number format",
+//   })
+//   phoneNumber!: string;
+// }
 
-  @IsString({ message: "Type is required" })
-  @IsIn(["email", "phone"], { message: "Type must be either 'email' or 'phone'" })
-  type!: string;
+export interface SendOtpDto {
+  phoneNumber: string;
 }

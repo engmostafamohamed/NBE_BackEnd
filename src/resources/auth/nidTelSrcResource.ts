@@ -1,14 +1,14 @@
 import { ICustNidTelSrc } from '../../interfaces/ICustNidTelSrc';
 
-export interface CustNidTelSrcResourceData {
+export interface nidTelSrcResourceData {
   id: number;
   nationalId: number;
   phoneNumber: string;
   createdAt: string;
   updatedAt: string;
 }
-export class CustNidTelSrcResource {
-  static single(data: ICustNidTelSrc): CustNidTelSrcResourceData {
+export class NidTelSrcResource {
+  static single(data: ICustNidTelSrc): nidTelSrcResourceData {
     return {
       id: data.id ?? 0,
       nationalId: data.nationalID,
@@ -18,7 +18,7 @@ export class CustNidTelSrcResource {
     };
   }
 
-  static collection(data: ICustNidTelSrc[]): CustNidTelSrcResourceData[] {
+  static collection(data: ICustNidTelSrc[]): nidTelSrcResourceData[] {
     return data.map(item => this.single(item));
   }
 }

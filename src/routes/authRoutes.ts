@@ -1,15 +1,19 @@
 import express from "express";
-import { validateDto } from "../middlewares/validateDto";
-import { SendOtpDto } from "../dtos/auth/SendOtpDto";
-import { VerifyOtpDto } from "../dtos/auth/VerifyOtpDto";
-
+import { NidTelSrcMiddleware } from "../middlewares/nidTelSrcMiddleware";
+import { OtpMiddleware } from "../middlewares/otpMiddleware";
 import {
   sendOtpController,
   verifyOtpController,
+  storeNationalIdAndPhoneNumberController,
 } from "../controllers/AuthController";
 
 const router = express.Router();
-router.post("/send-otp", validateDto(SendOtpDto), sendOtpController);
-router.post("/verify-otp", validateDto(VerifyOtpDto), verifyOtpController);
+router.post(
+  "/store-nid-phone",
+  NidTelSrcMiddleware.validateStore,
+  storeNationalIdAndPhoneNumberController
+);
+router.post("/send-otp", OtpMiddleware.validateSendOtp, sendOtpController);
+router.post("/verify-otp", OtpMiddleware.validateVerifyOtp, verifyOtpController);
 
 export default router;
